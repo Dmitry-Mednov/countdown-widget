@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notion Widget - Time Left</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Trebuchet MS, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+            padding: 25px 80px 25px 80px;
+            border: 0px solid #333;
+            border-radius: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .time-box {
+            font-size: 3em;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="time-box" id="hours-left">
+            0
+        </div>
+        <div class="time-box" id="seconds-left">
+            0
+        </div>
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const endOfYear = new Date(now.getFullYear(), 11, 31, 23, 59, 59);
+            const hoursLeftThisYear = Math.floor((endOfYear - now) / (1000 * 60 * 60));
+            const secondsLeftThisHour = 3600 - (now.getMinutes() * 60 + now.getSeconds());
+
+            document.getElementById('hours-left').innerText = hoursLeftThisYear;
+            document.getElementById('seconds-left').innerText = secondsLeftThisHour;
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body>
+</html>
